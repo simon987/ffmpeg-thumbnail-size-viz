@@ -8,7 +8,8 @@ from multiprocessing import Pool
 
 files = list(glob("examples/*.jpg"))
 SIZES = [550, 500, 450, 400, 350, 300, 250, 200, 150, 100]
-QUALITIES = [13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2]
+# QUALITIES = [13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2]
+QUALITIES = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
 
 params = {
     "file": files,
@@ -20,7 +21,7 @@ tasks = list(ParameterGrid(params))
 
 
 def do_task(param):
-    output_name = f"output/{os.path.basename(param['file'])}_{param['size']}_{param['quality']}.jpg"
+    output_name = f"output/{os.path.basename(param['file'])}_{param['size']}_{param['quality']}.webp"
     data_name = f"data/{os.path.basename(param['file'])}_{param['size']}_{param['quality']}.json"
     if os.path.exists(output_name):
         os.remove(output_name)
@@ -30,6 +31,7 @@ def do_task(param):
         "-vf", f"scale={param['size']}:-1",
         "-sws_flags", "lanczos",
         "-q:v", f"{param['quality']}",
+        "-compression_level", "6",
         "-hide_banner", "-loglevel", "error",
         output_name,
     ]

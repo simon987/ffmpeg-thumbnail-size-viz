@@ -4,7 +4,8 @@ from glob import glob
 import numpy as np
 
 SIZES = [550, 500, 450, 400, 350, 300, 250, 200, 150, 100]
-QUALITIES = [13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2]
+# QUALITIES = [13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2]
+QUALITIES = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
 
 mat = np.zeros((len(SIZES), len(QUALITIES)))
 
